@@ -12,42 +12,39 @@
     <AssemblyName>ZombieAssault</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
-    <Optimize>True</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="OpenTK">
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\OpenTK.dll</Package>
-    </Reference>
+    <Reference Include="OpenTK" />
     <Reference Include="MonoGame.Framework.Windows">
       <HintPath>..\..\..\..\Program Files %28x86%29\MonoGame\v3.0\Assemblies\MonoGame.Framework.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Lidgren.Network">
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Lidgren.Network.dll</Package>
+    <Reference Include="Lidgren.Network" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Tao.Sdl, Version=1.2.13.0, Culture=neutral, PublicKeyToken=9c7a200e36c0094e">
       <Private>False</Private>
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Tao.Sdl.dll</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>

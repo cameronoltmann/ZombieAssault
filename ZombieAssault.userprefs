@@ -1,13 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ZombieAssaultLinux\Properties\AssemblyInfo.cs">
-    <Files>
-      <File FileName="ZombieAssault\ZombieGame.cs" Line="47" Column="68" />
-      <File FileName="ZombieAssault\Program.cs" Line="1" Column="1" />
-      <File FileName="ZombieAssault\Properties\AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="ZombieAssaultLinux\Properties\AssemblyInfo.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

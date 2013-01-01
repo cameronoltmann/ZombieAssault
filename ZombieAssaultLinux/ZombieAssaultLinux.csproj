@@ -12,44 +12,45 @@
     <AssemblyName>ZombieAssaultLinux</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
-    <Optimize>True</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="OpenTK">
-      <HintPath>OpenTK</HintPath>
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\OpenTK.dll</Package>
-    </Reference>
     <Reference Include="MonoGame.Framework.Linux">
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\MonoGame.Framework.Linux.dll</Package>
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Release\MonoGame.Framework.Linux.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Lidgren.Network.dll</Package>
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Release\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Sdl">
-      <HintPath>Tao.Sdl.dll</HintPath>
-      <Package>C:\Program Files (x86)\MonoGame\v3.0\Assemblies\Tao.Sdl.dll</Package>
+      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Release\Tao.Sdl.dll</HintPath>
     </Reference>
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+      <Private>False</Private>
+      <Package>opentk</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,14 @@
     </Content>
     <Content Include="..\ZombieAssault\Content\zombie.png">
       <Link>Content\zombie.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\ZombieAssault\Content\BannerFont.xnb">
+      <Link>Content\BannerFont.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\ZombieAssault\Content\SystemFont.xnb">
+      <Link>Content\SystemFont.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
