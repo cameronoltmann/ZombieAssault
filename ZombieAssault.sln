@@ -21,6 +21,6 @@ Global
 		{D7DB6631-C12D-4F99-AF36-66500A762FF3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ZombieAssaultLinux\ZombieAssaultLinux.csproj
+		StartupItem = ZombieAssault\ZombieAssault.csproj
 	EndGlobalSection
 EndGlobal

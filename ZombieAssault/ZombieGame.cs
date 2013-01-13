@@ -18,6 +18,13 @@ namespace ZombieAssault
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		TileMap myMap = new TileMap();
+		int squaresAcross = 10;
+		int squaresDown = 10;
+		TileSet tileSet;
+		TileSet mobTileSet;
+		Viewport mainView;
+
 		public ZombieGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
@@ -34,6 +41,12 @@ namespace ZombieAssault
 		protected override void Initialize ()
 		{
 			// TODO: Add your initialization logic here
+			mainView = graphics.GraphicsDevice.Viewport;
+
+			mainView.X = 16;
+			mainView.Y = 16;
+			mainView.Width = 320;
+			mainView.Height = 320;
 			base.Initialize ();
 				
 		}
@@ -48,6 +61,11 @@ namespace ZombieAssault
 			spriteBatch = new SpriteBatch (GraphicsDevice);
 
 			//TODO: use this.Content to load your game content here 
+			tileSet = new TileSet(Content.Load<Texture2D>("Tiles"));
+			mobTileSet = new TileSet(Content.Load<Texture2D>("Tiles"), BlendState.NonPremultiplied);
+			squaresAcross = mainView.Width / tileSet.TileWidth + 1;
+			squaresDown = mainView.Height / tileSet.TileHeight + 1;
+
 		}
 
 		/// <summary>
@@ -61,7 +79,23 @@ namespace ZombieAssault
 			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed) {
 				Exit ();
 			}
-			// TODO: Add your update logic here			
+
+			KeyboardState ks = Keyboard.GetState ();
+			if (ks.IsKeyDown (Keys.Left)) {
+				Camera.Location.X = MathHelper.Clamp (Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * tileSet.TileWidth);
+			}
+			if (ks.IsKeyDown (Keys.Right)) {
+				Camera.Location.X = MathHelper.Clamp (Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * tileSet.TileWidth);
+			}
+			if (ks.IsKeyDown (Keys.Up)) {
+				Camera.Location.Y = MathHelper.Clamp (Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * tileSet.TileHeight);
+			}
+			if (ks.IsKeyDown (Keys.Down)) {
+				Camera.Location.Y = MathHelper.Clamp (Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * tileSet.TileHeight);
+			}
+
+			// TODO: Add your update logic here
+
 			base.Update (gameTime);
 		}
 
@@ -72,9 +106,35 @@ namespace ZombieAssault
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
+
+			graphics.GraphicsDevice.Viewport = mainView;
 		
 			//TODO: Add your drawing code here
-            
+			//spriteBatch.Begin (SpriteSortMode.FrontToBack, BlendState.NonPremultiplied); -- use this for adding mobs to map
+			spriteBatch.Begin (SpriteSortMode.FrontToBack, tileSet.BlendMode);
+			//spriteBatch.Begin ();
+
+			Vector2 firstSquare = new Vector2 (Camera.Location.X / tileSet.TileWidth, Camera.Location.Y / tileSet.TileHeight);
+			int firstX = (int)firstSquare.X;
+			int firstY = (int)firstSquare.Y;
+
+			Vector2 squareOffset = new Vector2 (Camera.Location.X % tileSet.TileWidth, Camera.Location.Y % tileSet.TileHeight);
+			int offsetX = (int)squareOffset.X;
+			int offsetY = (int)squareOffset.Y;
+
+			for (int y = 0; y < squaresDown; y++)
+			{
+				for (int x = 0; x < squaresAcross; x++) {
+					spriteBatch.Draw (
+						tileSet.TileSetTexture,
+						new Rectangle ((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
+						tileSet.GetSourceRectangle (myMap.Rows[y + firstY].Columns [x + firstX].TileID),
+						Color.Gray);
+				}
+			}
+
+			spriteBatch.End();
+
 			base.Draw (gameTime);
 		}
 	}
