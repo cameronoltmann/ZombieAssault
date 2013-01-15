@@ -18,18 +18,20 @@ namespace ZombieAssault
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		TileMap myMap = new TileMap();
-		int squaresAcross = 10;
-		int squaresDown = 10;
+		TileMap level = new TileMap();
 		TileSet tileSet;
 		TileSet mobTileSet;
 		Viewport mainView;
+		Camera camera = new Camera();
 
 		public ZombieGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
-			//graphics.IsFullScreen = true;		
+			//graphics.PreferredBackBufferWidth = 1024;
+			//graphics.PreferredBackBufferHeight = 768;
+
+			graphics.IsFullScreen = true;		
 		}
 
 		/// <summary>
@@ -41,14 +43,18 @@ namespace ZombieAssault
 		protected override void Initialize ()
 		{
 			// TODO: Add your initialization logic here
-			mainView = graphics.GraphicsDevice.Viewport;
-
-			mainView.X = 16;
-			mainView.Y = 16;
-			mainView.Width = 320;
-			mainView.Height = 320;
+			if (graphics.IsFullScreen) {
+				graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+				graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			}
 			base.Initialize ();
-				
+
+			mainView = graphics.GraphicsDevice.Viewport;
+			
+			Console.WriteLine("{0}, {1}, {2}, {3}", mainView.X, mainView.Y, mainView.Width, mainView.Height);
+			
+			camera.Location = new Vector2(level.Width/2, level.Height/2);
+
 		}
 
 		/// <summary>
@@ -63,8 +69,7 @@ namespace ZombieAssault
 			//TODO: use this.Content to load your game content here 
 			tileSet = new TileSet(Content.Load<Texture2D>("Tiles"));
 			mobTileSet = new TileSet(Content.Load<Texture2D>("Tiles"), BlendState.NonPremultiplied);
-			squaresAcross = mainView.Width / tileSet.TileWidth + 1;
-			squaresDown = mainView.Height / tileSet.TileHeight + 1;
+			Console.WriteLine("{0}, {1}, {2}, {3}", GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0);
 
 		}
 
@@ -82,16 +87,16 @@ namespace ZombieAssault
 
 			KeyboardState ks = Keyboard.GetState ();
 			if (ks.IsKeyDown (Keys.Left)) {
-				Camera.Location.X = MathHelper.Clamp (Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * tileSet.TileWidth);
+				camera.Location.X = MathHelper.Clamp (camera.Location.X - 2, 0, level.MapWidth * tileSet.TileWidth);
 			}
 			if (ks.IsKeyDown (Keys.Right)) {
-				Camera.Location.X = MathHelper.Clamp (Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * tileSet.TileWidth);
+				camera.Location.X = MathHelper.Clamp (camera.Location.X + 2, 0, level.MapWidth * tileSet.TileWidth);
 			}
 			if (ks.IsKeyDown (Keys.Up)) {
-				Camera.Location.Y = MathHelper.Clamp (Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * tileSet.TileHeight);
+				camera.Location.Y = MathHelper.Clamp (camera.Location.Y - 2, 0, level.MapHeight * tileSet.TileHeight);
 			}
 			if (ks.IsKeyDown (Keys.Down)) {
-				Camera.Location.Y = MathHelper.Clamp (Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * tileSet.TileHeight);
+				camera.Location.Y = MathHelper.Clamp (camera.Location.Y + 2, 0, level.MapHeight * tileSet.TileHeight);
 			}
 
 			// TODO: Add your update logic here
@@ -114,24 +119,8 @@ namespace ZombieAssault
 			spriteBatch.Begin (SpriteSortMode.FrontToBack, tileSet.BlendMode);
 			//spriteBatch.Begin ();
 
-			Vector2 firstSquare = new Vector2 (Camera.Location.X / tileSet.TileWidth, Camera.Location.Y / tileSet.TileHeight);
-			int firstX = (int)firstSquare.X;
-			int firstY = (int)firstSquare.Y;
+			level.Draw(mainView, camera, tileSet, spriteBatch);
 
-			Vector2 squareOffset = new Vector2 (Camera.Location.X % tileSet.TileWidth, Camera.Location.Y % tileSet.TileHeight);
-			int offsetX = (int)squareOffset.X;
-			int offsetY = (int)squareOffset.Y;
-
-			for (int y = 0; y < squaresDown; y++)
-			{
-				for (int x = 0; x < squaresAcross; x++) {
-					spriteBatch.Draw (
-						tileSet.TileSetTexture,
-						new Rectangle ((x * 32) - offsetX, (y * 32) - offsetY, 32, 32),
-						tileSet.GetSourceRectangle (myMap.Rows[y + firstY].Columns [x + firstX].TileID),
-						Color.Gray);
-				}
-			}
 
 			spriteBatch.End();
 

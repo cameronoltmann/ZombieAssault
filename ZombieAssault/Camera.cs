@@ -10,10 +10,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ZombieAssault
 {
-	static class Camera
+	public class Camera
 	{
-		static public Vector2 Location = Vector2.Zero;
-		
+		public Vector2 Location = Vector2.Zero;
 	}
 }
 
