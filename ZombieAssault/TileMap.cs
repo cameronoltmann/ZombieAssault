@@ -21,6 +21,8 @@ namespace ZombieAssault
 		public int TileHeight = 32;
 		public int Width;
 		public int Height;
+		float Scale = 1f;
+		float ScaleMod = .01f;
 
 		public TileMap ()
 		{
@@ -79,26 +81,14 @@ namespace ZombieAssault
 			Rows[5].Columns[7].TileID = 2;
 		}
 
-		public void Draw (Viewport viewport, Camera camera, TileSet tileSet, SpriteBatch spriteBatch)
+		public void Draw (Viewport viewport, TileSet tileSet, SpriteBatch spriteBatch)
 		{
 
-			int squaresAcross = (viewport.Width+tileSet.TileWidth-1)/tileSet.TileWidth + 1;
-			int squaresDown = (viewport.Height+tileSet.TileHeight-1)/tileSet.TileHeight + 1;
-
-			int left = (int)camera.Location.X - viewport.Width/2;
-			int top = (int)camera.Location.Y - viewport.Height/2;
-
-			int leftSquare = left/tileSet.TileWidth;
-			int topSquare = top/tileSet.TileHeight;
-
-			int xOffset = left % tileSet.TileWidth;
-			int yOffset = top % tileSet.TileHeight;
-
-			for (int y = Math.Max(0, topSquare); y < Math.Min(topSquare+squaresDown, MapHeight); y++) {
-				for (int x = Math.Max(0, leftSquare); x < Math.Min(leftSquare+squaresAcross, MapWidth); x++) {
+			for (int y = 0; y < MapHeight; y++) {
+				for (int x = 0; x < MapWidth; x++) {
 					spriteBatch.Draw (
 						tileSet.TileSetTexture,
-						new Rectangle ((x - leftSquare) * tileSet.TileWidth - xOffset, (y - topSquare) * tileSet.TileHeight - yOffset, tileSet.TileHeight, tileSet.TileWidth),
+						new Rectangle(x * tileSet.TileWidth, y * tileSet.TileHeight, tileSet.TileWidth, tileSet.TileHeight),
 						tileSet.GetSourceRectangle (Rows[y].Columns[x].TileID),
 						Color.Gray);
 				}

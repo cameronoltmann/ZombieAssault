@@ -56,8 +56,9 @@
     <Compile Include="ZombieGame.cs" />
     <Compile Include="MapCell.cs" />
     <Compile Include="TileMap.cs" />
-    <Compile Include="Camera.cs" />
     <Compile Include="TileSet.cs" />
+    <Compile Include="Camera2D.cs" />
+    <Compile Include="InputState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

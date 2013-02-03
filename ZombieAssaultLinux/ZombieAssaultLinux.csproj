@@ -63,8 +63,9 @@
     </Compile>
     <Compile Include="..\ZombieAssault\TileMap.cs" />
     <Compile Include="..\ZombieAssault\MapCell.cs" />
-    <Compile Include="..\ZombieAssault\Camera.cs" />
     <Compile Include="..\ZombieAssault\TileSet.cs" />
+    <Compile Include="..\ZombieAssault\Camera2D.cs" />
+    <Compile Include="..\ZombieAssault\InputState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

@@ -2,20 +2,19 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="ZombieAssault\ZombieGame.cs">
     <Files>
-      <File FileName="ZombieAssault\ZombieGame.cs" Line="27" Column="17" />
+      <File FileName="ZombieAssault\ZombieGame.cs" Line="34" Column="4" />
       <File FileName="ZombieAssault\MapCell.cs" Line="8" Column="1" />
-      <File FileName="ZombieAssault\TileMap.cs" Line="30" Column="24" />
+      <File FileName="ZombieAssault\TileMap.cs" Line="86" Column="60" />
       <File FileName="..\MonoGame\Pong\Pong\Pong.cs" Line="1" Column="1" />
       <File FileName="ZombieAssault\TileSet.cs" Line="31" Column="20" />
-      <File FileName="ZombieAssault\Camera.cs" Line="11" Column="1" />
+      <File FileName="ZombieAssault\Camera.cs" Line="16" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
+        <State expanded="True" selected="True">
           <Node name="ZombieAssault" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="Content" expanded="True" />
-            <Node name="ZombieGame.cs" selected="True" />
           </Node>
           <Node name="ZombieAssaultLinux" expanded="True">
             <Node name="Content" expanded="True" />
