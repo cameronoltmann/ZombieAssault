@@ -22,7 +22,7 @@ namespace ZombieAssault
 			int tileX = tileIndex % (TileSetTexture.Width / TileWidth);
 			int tileY = tileIndex / (TileSetTexture.Width / TileWidth);
 
-			return new Rectangle(tileX * TileWidth, tileY * TileHeight, TileWidth, TileHeight);
+			return new Rectangle(tileX * (TileWidth+2) + 1, tileY * (TileHeight+2) + 1, TileWidth, TileHeight);
 		}
 
 		public TileSet (Texture2D texture, BlendState blendState = null)

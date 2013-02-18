@@ -17,6 +17,8 @@ namespace ZombieAssault
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		SpriteFont systemFont;
+		SpriteFont bannerFont;
 
 		InputState input = new InputState(); 
 
@@ -27,14 +29,14 @@ namespace ZombieAssault
 		Camera2D camera = new Camera2D();
 		float targetZoom = 1f;
 		float lastZoomFactor = 1f;
+		TimeSpan elapsedTime = TimeSpan.Zero;
+		int frameCounter = 0;
+		int frameRate = 0;
 
 		public ZombieGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
-			//graphics.PreferredBackBufferWidth = 1024;
-			//graphics.PreferredBackBufferHeight = 768;
-
 			graphics.IsFullScreen = true;		
 		}
 
@@ -61,6 +63,8 @@ namespace ZombieAssault
 			camera.Location = new Vector2(level.Width/2, level.Height/2);
 			camera.MinZoom = .2f;
 
+			IsFixedTimeStep = false;
+
 		}
 
 		/// <summary>
@@ -71,6 +75,8 @@ namespace ZombieAssault
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch (GraphicsDevice);
+			systemFont = Content.Load<SpriteFont>("SystemFont");
+			bannerFont = Content.Load<SpriteFont>("BannerFont");
 
 			//TODO: use this.Content to load your game content here 
 			tileSet = new TileSet(Content.Load<Texture2D>("Tiles"));
@@ -86,6 +92,13 @@ namespace ZombieAssault
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update (GameTime gameTime)
 		{
+			elapsedTime += gameTime.ElapsedGameTime;
+
+			if (elapsedTime > TimeSpan.FromSeconds (1)) {
+				elapsedTime -= TimeSpan.FromSeconds (1);
+				frameRate = frameCounter;
+				frameCounter = 0;
+			}
 
 			// For Mobile devices, this logic will close the Game when the Back button is pressed
 			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed) {
@@ -159,6 +172,9 @@ namespace ZombieAssault
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
+
+			frameCounter++;
+
 			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
 
 			graphics.GraphicsDevice.Viewport = mainView;
@@ -177,6 +193,11 @@ namespace ZombieAssault
 
 			camera.Render(mainView, tileSet, spriteBatch);
 			spriteBatch.End();
+
+			spriteBatch.Begin ();
+			spriteBatch.DrawString (systemFont, string.Format("FPS: {0}", frameRate), new Vector2(mainView.Width-79, 3), Color.Black);
+			spriteBatch.DrawString (systemFont, string.Format("FPS: {0}", frameRate), new Vector2(mainView.Width-80, 2), Color.White);
+			spriteBatch.End ();
 
 			base.Draw (gameTime);
 		}

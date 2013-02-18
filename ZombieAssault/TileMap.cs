@@ -21,8 +21,6 @@ namespace ZombieAssault
 		public int TileHeight = 32;
 		public int Width;
 		public int Height;
-		float Scale = 1f;
-		float ScaleMod = .01f;
 
 		public TileMap ()
 		{
@@ -40,45 +38,15 @@ namespace ZombieAssault
 			}
 			
 			// Create Sample Map Data
-			Rows[0].Columns[3].TileID = 23;
-			Rows[0].Columns[4].TileID = 23;
-			Rows[0].Columns[5].TileID = 1;
-			Rows[0].Columns[6].TileID = 1;
-			Rows[0].Columns[7].TileID = 1;
-			
-			Rows[1].Columns[3].TileID = 23;
-			Rows[1].Columns[4].TileID = 1;
-			Rows[1].Columns[5].TileID = 1;
-			Rows[1].Columns[6].TileID = 1;
-			Rows[1].Columns[7].TileID = 1;
-			
-			Rows[2].Columns[2].TileID = 23;
-			Rows[2].Columns[3].TileID = 1;
-			Rows[2].Columns[4].TileID = 1;
-			Rows[2].Columns[5].TileID = 1;
-			Rows[2].Columns[6].TileID = 1;
-			Rows[2].Columns[7].TileID = 1;
-			
-			Rows[3].Columns[2].TileID = 23;
-			Rows[3].Columns[3].TileID = 1;
-			Rows[3].Columns[4].TileID = 1;
-			Rows[3].Columns[5].TileID = 2;
-			Rows[3].Columns[6].TileID = 2;
-			Rows[3].Columns[7].TileID = 2;
-			
-			Rows[4].Columns[2].TileID = 23;
-			Rows[4].Columns[3].TileID = 1;
-			Rows[4].Columns[4].TileID = 1;
-			Rows[4].Columns[5].TileID = 2;
-			Rows[4].Columns[6].TileID = 2;
-			Rows[4].Columns[7].TileID = 2;
-			
-			Rows[5].Columns[2].TileID = 23;
-			Rows[5].Columns[3].TileID = 1;
-			Rows[5].Columns[4].TileID = 1;
-			Rows[5].Columns[5].TileID = 2;
-			Rows[5].Columns[6].TileID = 2;
-			Rows[5].Columns[7].TileID = 2;
+			for (int y=0; y<MapHeight; y++) {
+				for (int x=0; x<MapHeight; x++) {
+					Rows[y].Columns[0].TileID = 1;
+					Rows[y].Columns[MapWidth-1].TileID = 1;
+					Rows[0].Columns[x].TileID = 1;
+					Rows[MapWidth-1].Columns[x].TileID = 1;
+				}
+			}
+					
 		}
 
 		public void Draw (Viewport viewport, TileSet tileSet, SpriteBatch spriteBatch)

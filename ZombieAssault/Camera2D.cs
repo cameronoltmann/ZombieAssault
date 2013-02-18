@@ -25,7 +25,7 @@ namespace ZombieAssault
 
 		public Camera2D (TileMap tm = null){
 			MinZoom = .1f;
-			MaxZoom = 4f;
+			MaxZoom = 8f;
 			Zoom = 1f;
 			Rotation = 0f;
 			Location = Vector2.Zero;
